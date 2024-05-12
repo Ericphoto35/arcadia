@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenu au ZOO Arcadia
+{% endblock %}
+
+{% block body %}
+	<article>
+		<div class="container p-4">
+			<h1 class="text-center text-white p-4">Bienvenue au Zoo ARCADIA</h1>
+			<div class="row row-cols-1 row-cols-lg-2 align-items-center">
+				<div class="col">
+					<p class="text-white">
+						Venez explorer notre paradis animalier, où la nature et la faune se rencontrent dans un
+					    équilibre harmonieux. Zoo Arcadia, situé à mi-chemin entre Rennes et Saint-Malo, vous offre une
+						expérience unique au cœur de trois habitats fascinants : l’Amazonie, l’Arctique et la Savane.
+					</p>
+				</div>
+				<div class="col">
+					<img class="w-100 rounded" src="{{ asset('assets/image/africa-1603382_1280.jpg')}}" alt=" food">
+				</div>
+			</div>
+			<div class="text-center p-4">
+				<a href="/Contact" class="btn btn-dark">Plus d'infos</a>
+			</div>
+		</div>
+	</article>
+	<article class="cardhabitat">
+		<div class="container">
+			<div class="row row-cols-1 row-cols-sm-3 row-cols-md-3">
+				{% for habitats in habitats %}
+					<div class="col">
+						<div class="card shadow-sm cardsmall mb-3 mt-3">
+							<img src="/uploads/{{habitats.habitatimage}}" alt="{{ habitats.habitatname }}" aria-label="Placeholder: Thumbnail" class="img-fluid rounded-top">
+							<text class="text-center">{{habitats.habitatname}}</text>
+							<div class="card-body">
+								<p class="card-text">{{habitats.habitatdescription | raw}}</p>
+								<div class="d-flex align-items-center">
+									<div class="btn-group mx-auto">
+										<button type="button" class="btn btn-sm btn-outline-secondary">Plus d'infos</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</article>
+	<article class="row row-cols-1 row-cols-md-3 bg-dark">
+		{% for services in services %}
+			<div class="container p-4">
+				<h2 class="text-center text-white p-4">{{services.servicename}}</h2>
+				<div class="row row-cols-1 row-cols-lg-1 align-items-center">
+					<div class="col">
+						<a href="/contact"><img class="w-100 rounded img-hover" src="/uploads/{{services.serviceimage}}" alt="food"></a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</article>
+	<article class="horairecolor">
+		<div class="row row-cols-1 row-cols-md-2">
+			<h4 class="text-center text-white p-4">Horaires</h4>
+			<p class="text-center text-white p-4">Le Zoo Arcadia est ouvert tous les jours de {{horairezoos.debut |date("H:i")}} à {{horairezoos.fin|date("H:i")}}.</p>
+		</div>
+	</article>
+	<article class="container mb-4">
+		<h2 class="text-center text-white p-4">Les Avis</h2>
+		<div class="row row-cols-1 row-cols-md-3">
+			<div id="carouselExample" class="carousel slide mx-auto">
+				<div class="carousel-inner">
+					{% for avisvisiteurs in avisvisiteurs %}
+						{% if avisvisiteurs.publication == "publié" %}
+							<div class="carousel-item {% if loop.first %}active{% endif %}">
+								<img src="{{ asset('assets/image/africa-1603382_1280.jpg') }}" class="d-block w-100" alt="...">
+								<div class="carousel-caption d-md-block">
+									<h4>{{ avisvisiteurs.prenom }}</h4>
+									<p>{{ avisvisiteurs.petitmot }}</p>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+		</div>
+	</article>
+	{% endblock %}
