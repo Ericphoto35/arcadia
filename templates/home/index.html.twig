@@ -30,8 +30,8 @@
 				{% for habitats in habitats %}
 					<div class="col">
 						<div class="card shadow-sm cardsmall mb-3 mt-3">
-							<img src="/uploads/{{habitats.habitatimage}}" alt="{{ habitats.habitatname }}" aria-label="Placeholder: Thumbnail" class="img-fluid rounded-top">
-							<text class="text-center">{{habitats.habitatname}}</text>
+							<img src="/uploads/{{habitats.habitatimage}}" alt="{{ habitats.habitatnom }}" aria-label="Placeholder: Thumbnail" class="img-fluid rounded-top">
+							<text class="text-center">{{habitats.habitatnom}}</text>
 							<div class="card-body">
 								<p class="card-text">{{habitats.habitatdescription | raw}}</p>
 								<div class="d-flex align-items-center">
@@ -49,7 +49,7 @@
 	<article class="row row-cols-1 row-cols-md-3 bg-dark">
 		{% for services in services %}
 			<div class="container p-4">
-				<h2 class="text-center text-white p-4">{{services.servicename}}</h2>
+				<h2 class="text-center text-white p-4">{{services.servicenom}}</h2>
 				<div class="row row-cols-1 row-cols-lg-1 align-items-center">
 					<div class="col">
 						<a href="/contact"><img class="w-100 rounded img-hover" src="/uploads/{{services.serviceimage}}" alt="food"></a>
