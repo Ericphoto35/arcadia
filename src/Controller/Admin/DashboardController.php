@@ -6,6 +6,7 @@ use App\Entity\Animals;
 use App\Entity\Habitats;
 use App\Entity\HorairesZoo;
 use App\Entity\Services;
+use App\Entity\User;
 use App\Entity\Vetvisit;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -49,6 +50,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::linktoCrud('Utilisateurs', 'fa fa-user', User::class);
         yield MenuItem::section('Services');
         yield MenuItem::linkToCrud('Services', 'fas fa-edit', Services::class);
         yield MenuItem::linktoCrud('Horaires', 'fas fa-edit', HorairesZoo::class);
