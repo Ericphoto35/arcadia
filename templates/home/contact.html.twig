@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactbisController!{% endblock %}
+
+{% block body %}
+<div class="container text-white vh-100 mt-5">
+		<h1 class="text-center">Nous contacter</h1>
+	{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+	{% endfor %}
+	<div class="container">
+    {{form(form)}}
+	</div>
+</div>
+{% endblock %}
+
