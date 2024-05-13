@@ -27,7 +27,7 @@ class Vetvisit
     private ?string $etat = null;
 
     #[ORM\ManyToOne(inversedBy: 'vetvisits')]
-    private ?animals $vetvisitanimal = null;
+    private ?Animals $vetvisitanimal = null;
 
     public function getId(): ?int
     {

@@ -26,11 +26,11 @@ class HabitatsCrudController extends AbstractCrudController
                 ->setRequired('false')
         ];
 
-        $habitatname = textField::new('habitatnom');
+        $habitatnom = textField::new('habitatnom');
 
         $habitatdescription = TextEditorField::new('habitatdescription');
 
-        $fields[]= $habitatname;
+        $fields[]= $habitatnom;
         $fields[] = $habitatdescription;
 
         return $fields;

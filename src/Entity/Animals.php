@@ -25,7 +25,7 @@ class Animals
     private ?string $imageani = null;
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
-    private ?habitats $habitatani = null;
+    private ?Habitats $habitatani = null;
 
     /**
      * @var Collection<int, Vetvisit>
@@ -38,6 +38,15 @@ class Animals
      */
     #[ORM\OneToMany(targetEntity: EspaceEmploye::class, mappedBy: 'empanimal')]
     private Collection $espaceEmployes;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $foodani = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $quantiteani = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $etatani = null;
 
     public function __construct()
     {
@@ -86,12 +95,12 @@ class Animals
         return $this;
     }
 
-    public function getHabitatani(): ?habitats
+    public function getHabitatani(): ?Habitats
     {
         return $this->habitatani;
     }
 
-    public function setHabitatani(?habitats $habitatani): static
+    public function setHabitatani(?Habitats $habitatani): static
     {
         $this->habitatani = $habitatani;
 
@@ -154,6 +163,42 @@ class Animals
                 $espaceEmploye->setEmpanimal(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFoodani(): ?string
+    {
+        return $this->foodani;
+    }
+
+    public function setFoodani(?string $foodani): static
+    {
+        $this->foodani = $foodani;
+
+        return $this;
+    }
+
+    public function getQuantiteani(): ?int
+    {
+        return $this->quantiteani;
+    }
+
+    public function setQuantiteani(?int $quantiteani): static
+    {
+        $this->quantiteani = $quantiteani;
+
+        return $this;
+    }
+
+    public function getEtatani(): ?string
+    {
+        return $this->etatani;
+    }
+
+    public function setEtatani(?string $etatani): static
+    {
+        $this->etatani = $etatani;
 
         return $this;
     }
