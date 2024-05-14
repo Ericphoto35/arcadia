@@ -24,7 +24,7 @@ class EspaceEmploye
     private ?int $empquantite = null;
 
     #[ORM\ManyToOne(inversedBy: 'espaceEmployes')]
-    private ?animals $empanimal = null;
+    private ?Animals $empanimal = null;
 
     public function getId(): ?int
     {
@@ -67,12 +67,12 @@ class EspaceEmploye
         return $this;
     }
 
-    public function getEmpanimal(): ?animals
+    public function getEmpanimal(): ?Animals
     {
         return $this->empanimal;
     }
 
-    public function setEmpanimal(?animals $empanimal): static
+    public function setEmpanimal(?Animals $empanimal): static
     {
         $this->empanimal = $empanimal;
 

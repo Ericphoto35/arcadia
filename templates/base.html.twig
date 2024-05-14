@@ -55,16 +55,16 @@
 									<a href="/admin" class="nav-link px-2 text-white">Admin</a>
 								</li>
 								{% endif %}
-								{#{% if is_granted('ROLE_EMP') %}#}
+								{% if is_granted('ROLE_EMP') %}
 								<li>
-									<a href="/login" class="nav-link px-2 text-white">Employé</a>
+									<a href="/emp" class="nav-link px-2 text-white">Employé</a>
 								</li>
-								{#{% endif %}#}
-								{#{% if is_granted('ROLE_VETO') %}#}
+								{% endif %}
+								{% if is_granted('ROLE_VETO') %}
 								<li>
 									<a href="/login" class="nav-link px-2 text-white">Vétérinaire</a>
 								</li>
-								{#{% endif %}#}
+								{% endif %}
 							</ul>
 							
 						</div>

@@ -64,5 +64,36 @@
 			<p class="text-center text-white p-4">Le Zoo Arcadia est ouvert tous les jours de {{horairezoos.debut |date("H:i")}} à {{horairezoos.fin |date("H:i")}} .</p>
 		</div>
 	</article>
+	<article class="container mb-4">
+		<h2 class="text-center text-white p-4">Les Avis</h2>
+		<div class="row row-cols-1 row-cols-md-3">
+			<div id="carouselExample" class="carousel slide mx-auto">
+				<div class="carousel-inner">
+					{% for avisvisiteurs in avisvisiteurs %}
+						{% if avisvisiteurs.publication == "publié" %}
+							<div class="carousel-item {% if loop.first %}active{% endif %}">
+								<img src="{{ asset('assets/image/africa-1603382_1280.jpg') }}" class="d-block w-100" alt="...">
+								<div class="carousel-caption d-md-block">
+									<h4>{{ avisvisiteurs.prenom }}</h4>
+									<p>{{ avisvisiteurs.petitmot }}</p>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+				<div class="text-center p-4">
+					<a href="/Avis" class="btn btn-dark">Donner un avis</a>
+				</div
+			</div>
+		</div>
+	</article>
 
 	{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AvisVisiteurController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper text-white vh-100">
+    <h1 class="text-center">UN AVIS ??</h1>
+    {{ form_start(form)}}
+    {{ form_row(form.Prenom)}}
+    {{ form_row(form.Petitmot)}}
+    <button type="submit" class="btn btn-dark">Envoyer</button>
+    {{ form_end(form)}}
+</div>
+{% endblock %}
