@@ -23,17 +23,22 @@ class VueAnimal3Controller extends AbstractController
         $pageId = 'app_pepe'; // Replace with your actual page ID
 
         $filter = ['app_pepe' => $pageId];
+        $viewCount = $collection->findOne($filter, ['projection' => ['view_count' => 1]]); // Get only view_count
+
+        if ($viewCount) {
+            $viewCount = $viewCount['view_count']; // Extract view count from document
+        } else {
+            $viewCount = 0; // Set to 0 if document not found
+        }
+
         $update = ['$inc' => ['view_count' => 1]];
         $options = ['upsert' => true];
 
         $updateResult = $collection->updateOne($filter, $update, $options);
-         if ($updateResult->getModifiedCount() === 1) {
-            echo "View count for page $pageId incremented successfully.\n";
-        } else {
-            echo "View count for page $pageId could not be incremented.\n";
-        }
+
         return $this->render('vue_animal/indexanimal.html.twig', [
             'animals' => $animal,
+            'viewCount' => $viewCount, // Pass retrieved view count
         ]);
     }
 }
