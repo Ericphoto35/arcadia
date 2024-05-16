@@ -15,7 +15,7 @@ class VueAnimal4Controller extends AbstractController
     public function index(EntityManagerInterface $EntityManager): Response
     {
 
-        $animal = $EntityManager->getRepository(Animals::class)->findOneBy(['prenomani' => 'coco']);
+        $animal = $EntityManager->getRepository(Animals::class)->findOneBy(['prenomani' => 'Coco']);
         
 
         return $this->render('vue_animal/indexanimal.html.twig', [
