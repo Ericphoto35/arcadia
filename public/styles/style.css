@@ -1,0 +1,50 @@
+body {
+    background-color: #26413c;
+    height:auto;
+}
+
+.cardhabitat {
+    background-color: #3e505b;
+}
+
+.cardsmall {
+    background-color: #8ab0ab;
+}
+
+.img-hover:hover {  /* Adjust opacity value for desired transparency on hover */
+  transition: opacity 0.3s ease-in-out;  /* Add a smooth transition effect */
+}
+
+.carouselcolor {
+    background-color: #3e505b;
+}
+.horairecolor {
+    background-color: #3e505b;
+}
+.servicescolor {
+    background-color: #3e505b;
+}
+.animal-name-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 1.2rem;
+    padding: 8px 12px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .img-hover:hover .animal-name-overlay {
+    opacity: 1;
+  }
+  .animauxcenter {
+    margin:auto;
+  }
+  h2 {
+    color: #8ab0ab;
+  }
+  .titreanimaux {
+    color: #e9d594;
+    text-decoration: underline;
+    text-transform: uppercase;
+  }
