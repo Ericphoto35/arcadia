@@ -3,6 +3,11 @@
 {% block title %}Hello ContactbisController!{% endblock %}
 
 {% block body %}
+<style>
+body{
+	background-color: #26413c;
+}
+</style>
 <div class="container text-white vh-100 mt-5">
 		<h1 class="text-center">Nous contacter</h1>
 	{% for message in app.flashes('success') %}
