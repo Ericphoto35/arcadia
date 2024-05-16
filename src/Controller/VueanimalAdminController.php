@@ -11,7 +11,7 @@ class VueanimalAdminController extends AbstractController
 {
     private function getViewCounts(): array
     {
-        $mongoClient = new MongoClient('mongodb://localhost:27017');
+        $mongoClient = new MongoClient('mongodb://Eric974:Biloute974#@lon5-c12-2.mongo.objectrocket.com:43741,lon5-c12-1.mongo.objectrocket.com:43741,lon5-c12-0.mongo.objectrocket.com:43741/Arcadia?replicaSet=dea02bd29b77453680af2162ec6f8654');
         $viewCounts = [];
         $collections = [];
 
