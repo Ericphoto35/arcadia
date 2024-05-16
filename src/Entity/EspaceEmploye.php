@@ -14,8 +14,8 @@ class EspaceEmploye
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $empvisite = null;
+    #[ORM\Column(nullable: true)]
+    private ?string $empvisite = null;
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $empfood = null;

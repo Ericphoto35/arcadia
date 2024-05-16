@@ -29,7 +29,7 @@ class VetvisitCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            DateTimeField::new('vetvisitedate'),
+            TextField::new('vetvisitedate'),
             TextField::new('food'),
             NumberField::new('quantite'),
             TextEditorField::new('etat'),

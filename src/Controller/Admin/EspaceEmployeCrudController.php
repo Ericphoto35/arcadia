@@ -26,7 +26,7 @@ class EspaceEmployeCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            DateTimeField::new('empvisite'),
+            TextField::new('empvisite'),
             NumberField::new('empquantite'),
             TextField::new('empfood'),
             AssociationField::new('empanimal'),

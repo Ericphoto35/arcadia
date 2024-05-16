@@ -14,8 +14,8 @@ class Vetvisit
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $vetvisitedate = null;
+    #[ORM\Column(nullable: true)]
+    private ?string $vetvisitedate = null;
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $food = null;
