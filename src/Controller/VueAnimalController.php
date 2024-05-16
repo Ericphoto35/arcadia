@@ -15,29 +15,10 @@ class VueAnimalController extends AbstractController
     public function index(EntityManagerInterface $EntityManager): Response
     {
         $animal = $EntityManager->getRepository(Animals::class)->findOneBy(['prenomani' => 'loulou']);
-        $mongoClient = new MongoClient('mongodb://lon5-c12-2.mongo.objectrocket.com:43741?ssl=true');
-        $db = $mongoClient->view_louloucounter;
-        $collection = $db->page_views;
-
-        $pageId = 'app_loulou'; // Replace with your actual page ID
-
-        $filter = ['app_loulou' => $pageId];
-        $viewCount = $collection->findOne($filter, ['projection' => ['view_count' => 1]]); // Get only view_count
-
-        if ($viewCount) {
-            $viewCount = $viewCount['view_count']; // Extract view count from document
-        } else {
-            $viewCount = 0; // Set to 0 if document not found
-        }
-
-        $update = ['$inc' => ['view_count' => 1]];
-        $options = ['upsert' => true];
-
-        $updateResult = $collection->updateOne($filter, $update, $options);
 
         return $this->render('vue_animal/indexanimal.html.twig', [
             'animals' => $animal,
-            'viewCount' => $viewCount, // Pass retrieved view count
+            
         ]);
     }
 }
