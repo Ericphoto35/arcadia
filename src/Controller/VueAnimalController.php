@@ -15,7 +15,7 @@ class VueAnimalController extends AbstractController
     public function index(EntityManagerInterface $EntityManager): Response
     {
         $animal = $EntityManager->getRepository(Animals::class)->findOneBy(['prenomani' => 'loulou']);
-        $mongoClient = new MongoClient('mongodb://Eric974:Biloute974#@lon5-c12-2.mongo.objectrocket.com:43741,lon5-c12-1.mongo.objectrocket.com:43741,lon5-c12-0.mongo.objectrocket.com:43741/Arcadia?replicaSet=dea02bd29b77453680af2162ec6f8654');
+        $mongoClient = new MongoClient('mongodb://lon5-c12-2.mongo.objectrocket.com:43741?ssl=true');
         $db = $mongoClient->view_louloucounter;
         $collection = $db->page_views;
 
