@@ -31,12 +31,12 @@ class EspaceEmploye
         return $this->id;
     }
 
-    public function getEmpvisite(): ?\DateTimeInterface
+    public function getEmpvisite(): ?string
     {
         return $this->empvisite;
     }
 
-    public function setEmpvisite(?\DateTimeInterface $empvisite): static
+    public function setEmpvisite(?string $empvisite): static
     {
         $this->empvisite = $empvisite;
 

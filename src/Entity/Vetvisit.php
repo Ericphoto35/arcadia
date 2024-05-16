@@ -34,12 +34,12 @@ class Vetvisit
         return $this->id;
     }
 
-    public function getVetvisitedate(): ?\DateTimeInterface
+    public function getVetvisitedate(): ?string
     {
         return $this->vetvisitedate;
     }
 
-    public function setVetvisitedate(?\DateTimeInterface $vetvisitedate): static
+    public function setVetvisitedate(?string $vetvisitedate): static
     {
         $this->vetvisitedate = $vetvisitedate;
 
