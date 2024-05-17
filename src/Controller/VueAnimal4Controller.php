@@ -16,7 +16,7 @@ class VueAnimal4Controller extends AbstractController
     {
 
         $animal = $EntityManager->getRepository(Animals::class)->findOneBy(['prenomani' => 'Coco']);
-        $mongoClient = new MongoClient('mongodb://Ericdu974:Biloute974@lon5-c12-2.mongo.objectrocket.com:43741,lon5-c12-1.mongo.objectrocket.com:43741,lon5-c12-0.mongo.objectrocket.com:43741/Arcadia?replicaSet=dea02bd29b77453680af2162ec6f8654');
+        $mongoClient = new MongoClient('mongodb://localhost:27017');
         $db = $mongoClient->view_cococounter;
         $collection = $db->page_views;
 
@@ -32,7 +32,7 @@ class VueAnimal4Controller extends AbstractController
         } else {
             echo "View count for page $pageId could not be incremented.\n";
         }
-        return $this->render('vue_animal/animal4.html.twig', [
+        return $this->render('animalby_one/index.html.twig', [
             'animals' => $animal,
         ]);
     }
