@@ -32,7 +32,7 @@ class VueAnimal4Controller extends AbstractController
         $pageId = 'app_coco'; // Replace with your actual page ID
         $viewCount = $this->getViewCount($pageId);
 
-        return $this->render('vues_animals/index.html.twig', [
+        return $this->render('vue_animal/animal4.html.twig', [
             'viewCount' => $viewCount,
         ]);
     }
