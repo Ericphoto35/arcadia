@@ -12,15 +12,28 @@ use MongoDB\Client as MongoClient;
 class VueAnimal4Controller extends AbstractController
 {
     #[Route('/Coco', name: 'app_coco')]
-    public function index(EntityManagerInterface $EntityManager): Response
+    private function getViewCount(string $pageId): int
+{
+    $mongoClient = new MongoClient;
+    $db = $mongoClient->view_cococounter;
+    $collection = $db->page_views;
+
+    $filter = ['app_coco' => $pageId];
+    $result = $collection->findOne($filter);
+
+    return $result ? $result['view_count'] : 0;
+}
+
+
+    #[Route('/vues', name: 'app_vues')]
+    
+    public function index(): Response
     {
+        $pageId = 'app_coco'; // Replace with your actual page ID
+        $viewCount = $this->getViewCount($pageId);
 
-        $animal = $EntityManager->getRepository(Animals::class)->findOneBy(['prenomani' => 'Coco']);
-        
-
-        return $this->render('vue_animal/indexanimal.html.twig', [
-            'animals' => $animal,
-            
+        return $this->render('vues_animals/index.html.twig', [
+            'viewCount' => $viewCount,
         ]);
     }
 }
