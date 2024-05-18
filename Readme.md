@@ -18,3 +18,12 @@ This repository is a ECF project for Study SCHOOL. Written with SYMFONY 7
   
 ## View
 ![Capture d'écran 2024-05-18 211911](https://github.com/Ericphoto35/arcadia/assets/150171033/d5cc9add-1cc1-49f2-85e9-af62f4270f35)
+
+## Installation 
+```
+https://github.com/Ericphoto35/arcadia.git
+```
+<br>**Githug cli :**<br> 
+```
+gh repo clone Ericphoto35/arcadia
+```
