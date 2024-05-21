@@ -50,6 +50,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::linktoRoute('Homepage', 'fa fa-home', 'Accueil');
         yield MenuItem::linktoCrud('Utilisateurs', 'fa fa-user', User::class);
         yield MenuItem::section('Services');
         yield MenuItem::linkToCrud('Services', 'fas fa-edit', Services::class);
@@ -59,7 +60,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Habitats');
         yield MenuItem::linkToCrud('Habitats', 'fas fa-edit', Habitats::class);
         yield MenuItem::linkToCrud('Animals', 'fas fa-edit', Animals::class);
-        yield MenuItem::linktoCrud('Avis Veto', 'fas fa-eye', Vetvisit::class);
+        yield MenuItem::linktoCrud('Avis Veto', 'fas fa-user-md', Vetvisit::class);
+        yield MenuItem::linktoRoute('Statistiques', 'fas fa-chart-bar', 'app_vues');
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }

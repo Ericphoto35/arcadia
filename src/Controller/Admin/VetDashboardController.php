@@ -45,7 +45,7 @@ class VetDashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('VisiteVeto', 'fas fa-list', Vetvisit::class);
-        // yield MenuItem::linkToCrud('EspaceEmploye', 'fas fa-list', EspaceEmploye::class);
+        yield MenuItem::linkToCrud('EspaceEmploye', 'fas fa-list', EspaceEmploye::class);
         // In your DashboardController
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
