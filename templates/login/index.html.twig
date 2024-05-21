@@ -27,7 +27,7 @@
 			<label for="password">Mot de passe:</label>
 			<input type="password" id="password" name="_password">
 			<input type="hidden" name="_target_path" value="/">    
-		<button class="row col-2 mx-auto mt-2" type="submit">login</button>
+		<button class="btn btn-dark mt-4" type="submit">login</button>
         {% if is_granted('ROLE_ADMIN') %}
 			<div class="text-center p-4">
 				<a href="/admin" class="btn btn-dark">Administration</a>
