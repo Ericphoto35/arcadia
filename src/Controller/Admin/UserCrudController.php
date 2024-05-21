@@ -22,7 +22,6 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             EmailField::new('email'),
-            ArrayField::new('roles'),
         ];
     }
     
