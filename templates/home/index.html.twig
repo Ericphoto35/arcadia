@@ -54,18 +54,18 @@ body{
 			</div>
 		</div>
 	</article>
-	<article class="">
-		{% for services in services %}
-			<div class="container p-4">
-				<h2 class="text-center text-white p-4">{{services.servicenom}}</h2>
-				<div class="row row-cols-1 row-cols-lg-1 align-items-center">
-					<div class="col">
-						<a href="/contact"><img class="w-100 rounded img-hover" src="/uploads/{{services.serviceimage}}" alt="food"></a>
-					</div>
-				</div>
-			</div>
-		{% endfor %}
-	</article>
+	<article class="container mb-4">
+  <div class="row">  {% for services in services %}
+      <div class="col-md-4">  <a href="/contact" class="text-white">
+              <h2 class="text-center text-white p-4">{{services.servicenom}}</h2>
+              <img class="w-100 rounded img-hover" src="/uploads/{{services.serviceimage}}" alt="food">
+          </a>
+      </div>
+    {% endfor %}
+  </div>
+</article>
+
+
 	<article class="horairecolor bg-light">
 		<div class="row row-cols-1 row-cols-md-2 ">
 			<h4 class="text-center text-dark p-4">Horaires</h4>
@@ -73,7 +73,7 @@ body{
 		</div>
 	</article>
 	<article class="container mb-4">
-		<h2 class="text-center text-dark p-4">Les Avis</h2>
+		<h2 class="text-center text-dark p-4 text-white">Les Avis</h2>
 		<div class="row row-cols-1 row-cols-md-3">
 			<div id="carouselExample" class="carousel slide mx-auto">
 				<div class="carousel-inner">
