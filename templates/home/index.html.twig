@@ -4,75 +4,98 @@
 {% endblock %}
 
 {% block body %}
-<style>
-body{
-	background-color: #26413c;
-}
-.cardhabitat {
-    background-color: #3e505b;
-}
-</style>
-	<article>
-		<div class="container p-4">
-			<h1 class="text-center text-white p-4">Bienvenue au Zoo ARCADIA</h1>
-			<div class="row row-cols-1 row-cols-lg-2 align-items-center">
-				<div class="col">
-					<p class="text-white">
-						Venez explorer notre paradis animalier, où la nature et la faune se rencontrent dans un équilibre harmonieux. 
-                        Zoo Arcadia, situé à mi-chemin entre Rennes et Saint-Malo, vous offre une expérience unique au cœur de trois habitats fascinants : 
-                        l’Amazonie, l’Arctique et la Savane.
-					</p>
+	<style>
+		body {
+			background-color: #26413c;
+		}
+		.cardhabitat {
+			background-color: #3e505b;
+		}
+		.image-container {
+        overflow: hidden;
+    }
+    .img-transform {
+        transition: transform 0.3s ease-in-out;
+    }
+    .img-transform:hover {
+        transform: scale(1.1);
+    }
+	</style>
+	<section>
+	<div class="container p-4">
+		<h1 class="text-center text-white p-4">Bienvenue au Zoo ARCADIA</h1>
+		<div class="row row-cols-1 row-cols-lg-2 align-items-center">
+			<div class="col">
+				<p class="text-white">
+					Venez explorer notre paradis animalier, où la nature et la faune se rencontrent dans un équilibre harmonieux. 
+					Zoo Arcadia, situé à mi-chemin entre Rennes et Saint-Malo, vous offre une expérience unique au cœur de trois habitats fascinants : 
+					l’Amazonie, l’Arctique et la Savane.
+				</p>
+			</div>
+			<div class="col">
+				<img class="w-100 rounded" src="{{ asset('image/africa-1603382_1280.jpg')}}" alt="">
+			</div>
+		</div>
+		<div class="text-center p-4">
+			<a href="/contact" class="btn btn-dark">Plus d'infos</a>
+		</div>
+	</div>
+</section>
+<section class="bg-dark py-4 ">
+    <div class="container">
+        <h2 class="text-center mb-4 text-white">LES HABITATS</h2>
+    </div>
+    <div class="container">
+        <div class="row mb-4">
+            {% for habitats in habitats %}
+                <div class="col-md-4 mb-4">
+                    <a href="/contact" class="text-white text-decoration-none">
+                        <h2 class="text-center p-4 text-white">{{habitats.habitatsnom}}</h2>
+                        <div class="image-container">
+                            <img class="w-100 rounded img-transform" src="/uploads/{{habitats.habitatsimg}}" alt="{{habitats.habitatsnom}}">
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="horairecolor bg-secondary">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-md-4">
+				<h4 class="text-center text-white">Horaires</h4>
+				<p class="text-center text-white">
+					Le Zoo Arcadia est ouvert tous les jours de {{horaireszoo.debut|date('H:i')}} à {{horaireszoo.fin|date('H:i')}}.
+				</p>
+			</div>
+			<div class="col-md-8">
+				<div id="weather-container" class="d-flex justify-content-around align-items-center">
+					<h5 class="mb-0">Météo à Rennes</h5>
+					<img id="weather-icon" src="" alt="Icône météo">
+					<p id="weather" class="mb-0"></p>
+					<p id="temperature" class="mb-0"></p>
 				</div>
-				<div class="col">
-					<img class="w-100 rounded" src="{{ asset('assets/image/africa-1603382_1280.jpg')}}" alt="">
-				</div>
-			</div>
-			<div class="text-center p-4">
-				<a href="/contact" class="btn btn-dark">Plus d'infos</a>
 			</div>
 		</div>
-	</article>
-	<article class="cardhabitat">
-		<div class="container">
-			<div class="row row-cols-1 row-cols-sm-3 row-cols-md-3">
-				{% for habitats in habitats %}
-					<div class="col">
-						<div class="card shadow-sm cardsmall mb-3 mt-3">
-							<img src="/uploads/{{habitats.habitatimage}}" alt="{{ habitats.habitatnom }}" aria-label="Placeholder: Thumbnail" class="img-fluid rounded-top">
-							<text class="text-center">{{habitats.habitatnom}}</text>
-							<div class="card-body">
-								<p class="card-text">{{habitats.habitatdescription | raw}}</p>
-								<div class="d-flex align-items-center">
-									<div class="btn-group mx-auto">
-										<button type="button" class="btn btn-sm btn-outline-secondary">Plus d'infos</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-		</div>
-	</article>
-	<article class="container mb-4">
-  <div class="row">  {% for services in services %}
-      <div class="col-md-4">  <a href="/contact" class="text-white">
-              <h2 class="text-center text-white p-4">{{services.servicenom}}</h2>
-              <img class="w-100 rounded img-hover" src="/uploads/{{services.serviceimage}}" alt="food">
-          </a>
-      </div>
-    {% endfor %}
-  </div>
-</article>
-
-
-	<article class="horairecolor bg-light">
-		<div class="row row-cols-1 row-cols-md-2 ">
-			<h4 class="text-center text-dark p-4">Horaires</h4>
-			<p class="text-center text-dark p-4">Le Zoo Arcadia est ouvert tous les jours de {{horairezoos.debut}}h à {{horairezoos.fin}}h .</p>
-		</div>
-	</article>
-	<article class="container mb-4">
+	</div>
+</section>
+<section class="container mb-5">
+    <div class="row">
+        {% for services in services %}
+            <div class="col-md-4">
+                <a href="/contact" class="text-white">
+                    <h2 class="text-center text-white p-4">{{services.servicesnom}}</h2>
+                    <div class="image-container">
+                        <img class="w-100 rounded img-transform" src="/uploads/{{services.serviceimg}}" alt="{{services.servicesnom}}">
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+<section class="bg-secondary">
+	<div class="container">
 		<h2 class="text-center text-dark p-4 text-white">Les Avis</h2>
 		<div class="row row-cols-1 row-cols-md-3">
 			<div id="carouselExample" class="carousel slide mx-auto">
@@ -80,7 +103,7 @@ body{
 					{% for avisvisiteurs in avisvisiteurs %}
 						{% if avisvisiteurs.publication == "publié" %}
 							<div class="carousel-item {% if loop.first %}active{% endif %}">
-								<img src="{{ asset('assets/image/africa-1603382_1280.jpg') }}" class="d-block w-100" alt="...">
+								<img src="{{ asset('image/africa-1603382_1280.jpg') }}" class="d-block w-100" alt="...">
 								<div class="carousel-caption d-md-block">
 									<h4>{{ avisvisiteurs.prenom }}</h4>
 									<p>{{ avisvisiteurs.petitmot }}</p>
@@ -99,9 +122,34 @@ body{
 				</button>
 				<div class="text-center p-4">
 					<a href="/avis" class="btn btn-dark">Donner un avis</a>
-				</div
+				</div</div>
 			</div>
 		</div>
-	</article>
+</section>
+
+	<script>
+		const apiKey = '8ba4a6141430d0f212d331cc6853d483';
+		const city = 'Rennes';
+		const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=fr`;
+		
+		fetch(apiUrl).then(response => response.json()).then(data => {
+		const weather = data.weather[0].description;
+		const temperature = data.main.temp;
+		const iconCode = data.weather[0].icon;
+		
+		document.getElementById('weather').textContent = `Conditions : ${weather}`;
+		document.getElementById('temperature').textContent = `${
+		temperature.toFixed(1)
+		}°C`;
+		
+		// Ajout de l'icône météo
+		const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
+		document.getElementById('weather-icon').src = iconUrl;
+		}).catch(error => {
+		console.error('Erreur lors de la récupération des données météo:', error);
+		document.getElementById('weather').textContent = 'Impossible de récupérer les données météo';
+		});
+				
+	</script>	
 
 	{% endblock %}

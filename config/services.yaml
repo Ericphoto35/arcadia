@@ -21,6 +21,16 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    
+
+easy_admin:
+    entities:
+        # Documents ODM
+        PageView:
+            class: App\Document\PageView
+            controller: App\Controller\Admin\PageviewCrudController
+        
+
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

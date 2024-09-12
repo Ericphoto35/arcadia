@@ -4,11 +4,12 @@
 {% endblock %}
 
 {% block body %}
-<style>
-body{
-	background-color: #26413c;
-}
-</style>
+
+	<style>
+		body {
+			background-color: #26413c;
+		}
+	</style>
 	<div class="hero-scene text-center text-white">
 		<div class="hero-scene-content">
 
@@ -17,21 +18,83 @@ body{
 
 		</div>
 	</div>
-	{% for services in services %}
-			<div class="text-white p-4 {% if loop.index is odd %} bg-dark{% endif %}">
-				<div class="container p-4">
-				<h2 class="text-center p-4 text-white">{{services.servicenom}}</h2>
-				<div class="row row-cols-1 row-cols-lg-2 align-items-center">
-					<div class="col">
-						<p class="text-center">
-							{{services.servicedescription | raw}}
-						</p>
-					</div>
-					<div class="col">
-						<img class="w-100 rounded" src="/uploads/{{services.serviceimage}}" alt="food">
-					</div>
+	<div class="text-white p-4 bg-dark">
+		<div class="container p-4">
+			<h2 class="text-center p-4 text-white" id="service1"></h2>
+			<div class="row row-cols-1 row-cols-lg-2 align-items-center">
+				<div class="col">
+					<p class="text-center" id="description1"></p>
 				</div>
+				<div class="col">
+					<img class="w-100 rounded" src="/uploads/" alt="food" id="image1">
 				</div>
 			</div>
-	{% endfor %}
-{% endblock %}
+		</div>
+	</div>
+	<div class="container p-4">
+		<h2 class="text-center p-4 text-white" id="service2"></h2>
+		<div class="row row-cols-1 row-cols-lg-2 align-items-center">
+			<div class="col">
+				<p class="text-center text-white" id="description2"></p>
+			</div>
+			<div class="col">
+				<img class="w-100 rounded" src="/uploads/" alt="food" id="image2">
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container p-4">
+	<h2 class="text-center p-4 text-white" id="service3"></h2>
+	<div class="row row-cols-1 row-cols-lg-2 align-items-center">
+		<div class="col">
+			<p class="text-center text-white" id="description3"></p>
+		</div>
+		<div class="col">
+			<img class="w-100 rounded" src="/uploads/" alt="food" id="image3">
+		</div>
+	</div>
+
+<div class="container">
+
+<p class="text-white">Cette page a été vue{{ viewCount }}fois.</p>
+</div>
+	
+	<script>
+async function recupererService(serviceId) {
+const url = `http://127.0.0.1:8000/api/services/${serviceId}`;
+const requestOptions = {
+method: "GET"
+};
+
+try {
+const response = await fetch(url, requestOptions);
+
+if (! response.ok) {
+throw new Error (`HTTP error! Status: ${
+response.status
+}`);
+}
+
+const serviceData = await response.json(); // Assume the response is JSON
+
+if (! serviceData || ! serviceData.servicenom) {
+throw new Error("Service name not found in response data");
+}
+
+const serviceElementId = `service${serviceId}`;
+const descriptionElementId = `description${serviceId}`;
+const imageElementId = `image${serviceId}`;
+
+document.getElementById(serviceElementId).innerHTML = serviceData.servicenom;
+document.getElementById(descriptionElementId).innerHTML = serviceData.servicedescription;
+document.getElementById(imageElementId).src = "/uploads/" + serviceData.serviceimage;
+} catch (error) {
+console.error("Error fetching service name:", error);
+// Optionally display a user-friendly error message
+}
+}
+
+// Call the function with the desired service IDs
+recupererService(3);
+recupererService(2);
+recupererService(1);</script>{% endblock %}

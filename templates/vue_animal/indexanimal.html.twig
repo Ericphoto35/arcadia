@@ -26,14 +26,15 @@
                     <p>{{animals.etatani}}</p>
 					<h4 class="titreanimaux">Race</h4>
 					<p>{{ animals.raceani | raw}}</p>
-					{% if is_granted('ROLE_ADMIN') %}
-					<p>View Count: {{ viewloulouCount }}</p>
-					{% endif %}
 			</div>
                 </div>
 			</div>
 		</div>
 	</div>
+</div>
+<div class="container">
+
+<p class="text-white">Cette page a été vue{{ viewCount }}fois.</p>
 </div>
 
 {% endblock %}
