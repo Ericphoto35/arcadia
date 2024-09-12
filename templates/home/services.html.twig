@@ -4,13 +4,7 @@
 {% endblock %}
 
 {% block body %}
-
-	<style>
-		body {
-			background-color: #26413c;
-		}
-	</style>
-	<div class="hero-scene text-center text-white">
+	<div class="hero-scene text-center text-white mt-5 mb-5">
 		<div class="hero-scene-content">
 
 			<h1>LES SERVICES</h1>
@@ -18,12 +12,12 @@
 
 		</div>
 	</div>
-	<div class="text-white p-4 bg-dark">
+	<div class="text-white bg-secondary">
 		<div class="container p-4">
-			<h2 class="text-center p-4 text-white" id="service1"></h2>
-			<div class="row row-cols-1 row-cols-lg-2 align-items-center">
+			<h2 class="text-center text-white" id="service1"></h2>
+			<div class="mt-4 row row-cols-1 row-cols-lg-2 align-items-center">
 				<div class="col">
-					<p class="text-center" id="description1"></p>
+					<p class="text-left" id="description1"></p>
 				</div>
 				<div class="col">
 					<img class="w-100 rounded" src="/uploads/" alt="food" id="image1">
@@ -31,11 +25,12 @@
 			</div>
 		</div>
 	</div>
-	<div class="container p-4">
+<div class="bg-dark">
+	<div class="container p-4 bg-dark">
 		<h2 class="text-center p-4 text-white" id="service2"></h2>
 		<div class="row row-cols-1 row-cols-lg-2 align-items-center">
 			<div class="col">
-				<p class="text-center text-white" id="description2"></p>
+				<p class="text-left text-white" id="description2"></p>
 			</div>
 			<div class="col">
 				<img class="w-100 rounded" src="/uploads/" alt="food" id="image2">
@@ -43,23 +38,20 @@
 		</div>
 	</div>
 </div>
+<div class="">
 <div class="container p-4">
 	<h2 class="text-center p-4 text-white" id="service3"></h2>
 	<div class="row row-cols-1 row-cols-lg-2 align-items-center">
 		<div class="col">
-			<p class="text-center text-white" id="description3"></p>
+			<p class="text-left text-white" id="description3"></p>
 		</div>
 		<div class="col">
 			<img class="w-100 rounded" src="/uploads/" alt="food" id="image3">
 		</div>
 	</div>
-
-<div class="container">
-
-<p class="text-white">Cette page a été vue{{ viewCount }}fois.</p>
-</div>
-	
-	<script>
+</div
+</div>	
+<script>
 async function recupererService(serviceId) {
 const url = `http://127.0.0.1:8000/api/services/${serviceId}`;
 const requestOptions = {
@@ -77,7 +69,7 @@ response.status
 
 const serviceData = await response.json(); // Assume the response is JSON
 
-if (! serviceData || ! serviceData.servicenom) {
+if (! serviceData || ! serviceData.servicesnom) {
 throw new Error("Service name not found in response data");
 }
 
@@ -85,9 +77,9 @@ const serviceElementId = `service${serviceId}`;
 const descriptionElementId = `description${serviceId}`;
 const imageElementId = `image${serviceId}`;
 
-document.getElementById(serviceElementId).innerHTML = serviceData.servicenom;
-document.getElementById(descriptionElementId).innerHTML = serviceData.servicedescription;
-document.getElementById(imageElementId).src = "/uploads/" + serviceData.serviceimage;
+document.getElementById(serviceElementId).innerHTML = serviceData.servicesnom;
+document.getElementById(descriptionElementId).innerHTML = serviceData.servicesdescription;
+document.getElementById(imageElementId).src = "/uploads/" + serviceData.serviceimg;
 } catch (error) {
 console.error("Error fetching service name:", error);
 // Optionally display a user-friendly error message
@@ -97,4 +89,5 @@ console.error("Error fetching service name:", error);
 // Call the function with the desired service IDs
 recupererService(3);
 recupererService(2);
-recupererService(1);</script>{% endblock %}
+recupererService(1);
+</script>{% endblock %}
