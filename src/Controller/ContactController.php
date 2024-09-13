@@ -28,16 +28,15 @@ class ContactController extends AbstractController
 
             // Envoi d'un mail
             $email = (new Email())
-            ->from('hello@example.com')
+            ->from($contact->getEmail())
             ->to('you@example.com')
             //->cc('cc@example.com')
             //->bcc('bcc@example.com')
             //->replyTo('fabien@example.com')
             //->priority(Email::PRIORITY_HIGH)
-            ->subject('Time for Symfony Mailer!')
-            ->text('Sending emails is fun again!')
+            ->subject($contact->getSubject())
+            ->text($contact->getMessage())
             ->html('<p>See Twig integration for better HTML integration!</p>');
-
             $mailer->send($email);
             $this->addFlash('success', 'Votre message a bien été envoyé');
             return $this->redirectToRoute('app_contact');

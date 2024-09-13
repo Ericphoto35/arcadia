@@ -14,35 +14,35 @@ class HorairesZoo
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $debut = null;
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $debut = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $fin = null;
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $fin = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDebut(): ?int
+    public function getDebut(): ?\DateTimeInterface
     {
         return $this->debut;
     }
 
-    public function setDebut(?int $debut): static
+    public function setDebut(?\DateTimeInterface $debut): static
     {
         $this->debut = $debut;
 
         return $this;
     }
 
-    public function getFin(): ?int
+    public function getFin(): ?\DateTimeInterface
     {
         return $this->fin;
     }
 
-    public function setFin(?int $fin): static
+    public function setFin(?\DateTimeInterface $fin): static
     {
         $this->fin = $fin;
 

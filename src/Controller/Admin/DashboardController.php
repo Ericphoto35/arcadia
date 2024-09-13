@@ -40,7 +40,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Services');
         yield MenuItem::linkToCrud('Services', 'fas fa-edit', Services::class);
         yield MenuItem::linktoCrud('Horaires', 'fas fa-edit', HorairesZoo::class);
-        yield MenuItem::linkToCrud('PageViews','fas fa-edit', PageView::class);
+        
         
 
         yield MenuItem::section('Habitats');
@@ -49,6 +49,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoCrud('Avis Veto', 'fas fa-user-md', Vetvisit::class);
     
 
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

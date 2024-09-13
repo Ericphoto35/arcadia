@@ -17,8 +17,8 @@ class HorairesZooCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IntegerField::new('debut'),
-            IntegerField::new('fin'),
+            TimeField::new('debut'),
+            TimeField::new('fin'),
         ];
     }
 }

@@ -7,9 +7,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use MongoDB\Client as MongoClient;
 use Symfony\Bundle\SecurityBundle\Security as SecurityBundleSecurity;
-use Symfony\Component\Security\Core\Security;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use App\Document\DocAnimal1;
 
 class VueAnimal8Controller extends AbstractController
 {
@@ -21,35 +21,24 @@ class VueAnimal8Controller extends AbstractController
     }
 
     #[Route('/Léo', name: 'app_leo')]
-    public function index(EntityManagerInterface $EntityManager): Response
+    public function index(EntityManagerInterface $EntityManager,DocumentManager $dm ): Response
     {
+        $pageViewRepository = $dm->getRepository(DocAnimal1::class);
+        $pageView = $pageViewRepository->findOneBy(['page' => 'leo']);
+        if (!$pageView) {
+            $pageView = new DocAnimal1();
+            $pageView->setPage('leo');
+        }
+        $pageView->incrementViewCount();
+        $dm->persist($pageView);
+        $dm->flush();
+
         $animal = $EntityManager->getRepository(Animals::class)->findOneBy(['prenomani' => 'leo']);
-        $mongoClient = new MongoClient($_ENV['MONGODB_URL']);
-        $db = $mongoClient->animal_counter;
-        $collection = $db->page_leoviews;
-
-        $pageId = 'app_leo'; // Replace with your actual page ID
-
-        $filter = ['app_leo' => $pageId];
-        $viewleoCount = $collection->findOne($filter, ['projection' => ['view_count' => 1]]); // Get only view_count
-
-        if ($viewleoCount) {
-            $viewleoCount = $viewleoCount['view_count']; // Extract view count from document
-        } else {
-            $viewleoCount = 0; // Set to 0 if document not found
-        }
-
-        // Check if user is admin
-        $currentUser = $this->getUser();
-        if (!$currentUser || !$this->isGranted('ROLE_ADMIN')) {
-            $update = ['$inc' => ['view_count' => 1]];
-            $options = ['upsert' => true];
-            $updateResult = $collection->updateOne($filter, $update, $options);
-        }
 
         return $this->render('vue_animal/animal8.html.twig', [
             'animals' => $animal,
-            'viewleoCount' => $viewleoCount,
+            'viewLeocount' => $pageView->getViewCount(),
         ]);
     }
 }
+

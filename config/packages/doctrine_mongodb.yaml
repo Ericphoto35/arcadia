@@ -3,7 +3,7 @@ doctrine_mongodb:
     auto_generate_hydrator_classes: true
     connections:
         default:
-            server: 'mongodb://localhost:27017'
+            server: '%env(resolve:MONGODB_URL)%'
             options: {}
     default_database: 'compteur_de_vues'
     document_managers:

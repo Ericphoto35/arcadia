@@ -8,8 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\SecurityBundle\Security as SecurityBundleSecurity;
-
-use MongoDB\Client as MongoClient;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use App\Document\DocAnimal1;
 
 class VueAnimal2Controller extends AbstractController
 {
@@ -21,35 +21,23 @@ class VueAnimal2Controller extends AbstractController
     }
 
     #[Route('/Céli', name: 'app_celi')]
-    public function index(EntityManagerInterface $EntityManager): Response
+    public function index(EntityManagerInterface $EntityManager,DocumentManager $dm ): Response
     {
+        $pageViewRepository = $dm->getRepository(DocAnimal1::class);
+        $pageView = $pageViewRepository->findOneBy(['page' => 'celi']);
+        if (!$pageView) {
+            $pageView = new DocAnimal1();
+            $pageView->setPage('celi');
+        }
+        $pageView->incrementViewCount();
+        $dm->persist($pageView);
+        $dm->flush();
+
         $animal = $EntityManager->getRepository(Animals::class)->findOneBy(['prenomani' => 'celi']);
-        $mongoClient = new MongoClient($_ENV['MONGODB_URL']);
-        $db = $mongoClient->animal_counter;
-        $collection = $db->page_celiviews;
-
-        $pageId = 'app_celi'; // Replace with your actual page ID
-
-        $filter = ['app_celi' => $pageId];
-        $viewceliCount = $collection->findOne($filter, ['projection' => ['view_count' => 1]]); // Get only view_count
-
-        if ($viewceliCount) {
-            $viewceliCount = $viewceliCount['view_count']; // Extract view count from document
-        } else {
-            $viewceliCount = 0; // Set to 0 if document not found
-        }
-
-        // Check if user is admin
-        $currentUser = $this->getUser();
-        if (!$currentUser || !$this->isGranted('ROLE_ADMIN')) {
-            $update = ['$inc' => ['view_count' => 1]];
-            $options = ['upsert' => true];
-            $updateResult = $collection->updateOne($filter, $update, $options);
-        }
 
         return $this->render('vue_animal/animal2.html.twig', [
             'animals' => $animal,
-            'viewceliCount' => $viewceliCount,
+            'viewCeliCount' => $pageView->getViewCount(),
         ]);
     }
 }

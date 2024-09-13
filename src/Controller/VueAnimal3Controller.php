@@ -8,8 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\SecurityBundle\Security as SecurityBundleSecurity;
-
-use MongoDB\Client as MongoClient;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use App\Document\DocAnimal1;
 
 class VueAnimal3Controller extends AbstractController
 {
@@ -20,36 +20,24 @@ class VueAnimal3Controller extends AbstractController
         $this->security = $security;
     }
 
-    #[Route('/pépé', name: 'app_pepe')]
-    public function index(EntityManagerInterface $EntityManager): Response
+    #[Route('/Jojo', name: 'app_jojo')]
+    public function index(EntityManagerInterface $EntityManager,DocumentManager $dm ): Response
     {
-        $animal = $EntityManager->getRepository(Animals::class)->findOneBy(['prenomani' => 'pepe']);
-        $mongoClient = new MongoClient($_ENV['MONGODB_URL']);
-        $db = $mongoClient->animal_counter;
-        $collection = $db->page_pepeviews;
-
-        $pageId = 'app_pepe'; // Replace with your actual page ID
-
-        $filter = ['app_pepe' => $pageId];
-        $viewpepeCount = $collection->findOne($filter, ['projection' => ['view_count' => 1]]); // Get only view_count
-
-        if ($viewpepeCount) {
-            $viewpepeCount = $viewpepeCount['view_count']; // Extract view count from document
-        } else {
-            $viewpepeCount = 0; // Set to 0 if document not found
+        $pageViewRepository = $dm->getRepository(DocAnimal1::class);
+        $pageView = $pageViewRepository->findOneBy(['page' => 'joseph']);
+        if (!$pageView) {
+            $pageView = new DocAnimal1();
+            $pageView->setPage('joseph');
         }
+        $pageView->incrementViewCount();
+        $dm->persist($pageView);
+        $dm->flush();
 
-        // Check if user is admin
-        $currentUser = $this->getUser();
-        if (!$currentUser || !$this->isGranted('ROLE_ADMIN')) {
-            $update = ['$inc' => ['view_count' => 1]];
-            $options = ['upsert' => true];
-            $updateResult = $collection->updateOne($filter, $update, $options);
-        }
+        $animal = $EntityManager->getRepository(Animals::class)->findOneBy(['prenomani' => 'jojo']);
 
-        return $this->render('vue_animal/animal3.html.twig', [
+        return $this->render('vue_animal/animal5.html.twig', [
             'animals' => $animal,
-            'viewpepeCount' => $viewpepeCount,
+            'viewJojocount' => $pageView->getViewCount(),
         ]);
     }
 }

@@ -50,9 +50,9 @@
             {% for habitats in habitats %}
                 <div class="col-md-4 mb-4">
                     <a href="/contact" class="text-white text-decoration-none">
-                        <h2 class="text-center p-4 text-white">{{habitats.habitatsnom}}</h2>
+                        <h2 class="text-center p-4 text-white">{{habitats.habitatnom}}</h2>
                         <div class="image-container">
-                            <img class="w-100 rounded img-transform" src="/uploads/{{habitats.habitatsimg}}" alt="{{habitats.habitatsnom}}">
+                            <img class="w-100 rounded img-transform" src="/uploads/{{habitats.habitatimage}}" alt="{{habitats.habitatnom}}">
                         </div>
                     </a>
                 </div>
@@ -66,7 +66,7 @@
 			<div class="col-md-4">
 				<h4 class="text-center text-white">Horaires</h4>
 				<p class="text-center text-white">
-					Le Zoo Arcadia est ouvert tous les jours de {{horaireszoo.debut|date('H:i')}} à {{horaireszoo.fin|date('H:i')}}.
+					Le Zoo Arcadia est ouvert tous les jours de {{horairezoos.debut|date('H:i')}} à {{horairezoos.fin|date('H:i')}}.
 				</p>
 			</div>
 			<div class="col-md-8">
@@ -85,9 +85,9 @@
         {% for services in services %}
             <div class="col-md-4">
                 <a href="/contact" class="text-white">
-                    <h2 class="text-center text-white p-4">{{services.servicesnom}}</h2>
+                    <h2 class="text-center text-white p-4">{{services.servicenom}}</h2>
                     <div class="image-container">
-                        <img class="w-100 rounded img-transform" src="/uploads/{{services.serviceimg}}" alt="{{services.servicesnom}}">
+                        <img class="w-100 rounded img-transform" src="/uploads/{{services.serviceimage}}" alt="{{services.servicenom}}">
                     </div>
                 </a>
             </div>
@@ -103,7 +103,7 @@
 					{% for avisvisiteurs in avisvisiteurs %}
 						{% if avisvisiteurs.publication == "publié" %}
 							<div class="carousel-item {% if loop.first %}active{% endif %}">
-								<img src="{{ asset('image/africa-1603382_1280.jpg') }}" class="d-block w-100" alt="...">
+								<img src="{{ asset('assets/image/africa-1603382_1280.jpg') }}" class="d-block w-100" alt="...">
 								<div class="carousel-caption d-md-block">
 									<h4>{{ avisvisiteurs.prenom }}</h4>
 									<p>{{ avisvisiteurs.petitmot }}</p>

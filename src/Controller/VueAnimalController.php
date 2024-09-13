@@ -24,10 +24,10 @@ class VueAnimalController extends AbstractController
     public function index(EntityManagerInterface $EntityManager,DocumentManager $dm ): Response
     {
         $pageViewRepository = $dm->getRepository(DocAnimal1::class);
-        $pageView = $pageViewRepository->findOneBy(['page' => 'services']);
+        $pageView = $pageViewRepository->findOneBy(['page' => 'loulou']);
         if (!$pageView) {
             $pageView = new DocAnimal1();
-            $pageView->setPage('services');
+            $pageView->setPage('loulou');
         }
         $pageView->incrementViewCount();
         $dm->persist($pageView);
@@ -37,8 +37,7 @@ class VueAnimalController extends AbstractController
 
         return $this->render('vue_animal/indexanimal.html.twig', [
             'animals' => $animal,
-            'viewCount' => $pageView->getViewCount(),
+            'viewLouloucount' => $pageView->getViewCount(),
         ]);
     }
 }
-

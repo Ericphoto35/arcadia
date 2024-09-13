@@ -20,7 +20,7 @@ class LoginController extends AbstractController
         // Si l'utilisateur est déjà connecté, redirigez-le vers la page admin
         if ($this->getUser()) {
             $this->addFlash('success', 'Vous êtes déjà connecté.');
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('accueil');
         }
 
 

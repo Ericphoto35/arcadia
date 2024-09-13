@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
+use App\Document\DocAnimal1;
 use App\Entity\Animals;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use MongoDB\Client as MongoClient;
 use Symfony\Bundle\SecurityBundle\Security as SecurityBundleSecurity;
-use Symfony\Component\Security\Core\Security;
+use Doctrine\ODM\MongoDB\DocumentManager;
+
 
 class VueAnimal4Controller extends AbstractController
 {
@@ -21,35 +22,24 @@ class VueAnimal4Controller extends AbstractController
     }
 
     #[Route('/Coco', name: 'app_coco')]
-    public function index(EntityManagerInterface $EntityManager): Response
+    public function index(EntityManagerInterface $EntityManager,DocumentManager $dm ): Response
     {
+        $pageViewRepository = $dm->getRepository(DocAnimal1::class);
+        $pageView = $pageViewRepository->findOneBy(['page' => 'coco']);
+        if (!$pageView) {
+            $pageView = new DocAnimal1();
+            $pageView->setPage('coco');
+        }
+        $pageView->incrementViewCount();
+        $dm->persist($pageView);
+        $dm->flush();
+
         $animal = $EntityManager->getRepository(Animals::class)->findOneBy(['prenomani' => 'coco']);
-        $mongoClient = new MongoClient($_ENV['MONGODB_URL']);
-        $db = $mongoClient->animal_counter;
-        $collection = $db->page_views;
 
-        $pageId = 'app_coco'; // Replace with your actual page ID
-
-        $filter = ['app_coco' => $pageId];
-        $viewCount = $collection->findOne($filter, ['projection' => ['view_count' => 1]]); // Get only view_count
-
-        if ($viewCount) {
-            $viewCount = $viewCount['view_count']; // Extract view count from document
-        } else {
-            $viewCount = 0; // Set to 0 if document not found
-        }
-
-        // Check if user is admin
-        $currentUser = $this->getUser();
-        if (!$currentUser || !$this->isGranted('ROLE_ADMIN')) {
-            $update = ['$inc' => ['view_count' => 1]];
-            $options = ['upsert' => true];
-            $updateResult = $collection->updateOne($filter, $update, $options);
-        }
-
-        return $this->render('vue_animal/indexanimal.html.twig', [
+        return $this->render('vue_animal/animal4.html.twig', [
             'animals' => $animal,
-            'viewCount' => $viewCount,
+            'viewCococount' => $pageView->getViewCount(),
         ]);
     }
 }
+

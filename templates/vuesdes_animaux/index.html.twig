@@ -1,18 +1,88 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello VuesdesAnimauxController!{% endblock %}
+{% block title %}Hello AnimalsController!{% endblock %}
 
 {% block body %}
+
+<div class="container">
+    {% for habitat in habitats %}
+        <div class="mb-5">
+            <h2 class="text-center mb-4">{{ habitat.habitatnom }}</h2>
+            <div class="row justify-content-center">
+                {% for animal in habitat.animals %}
+                    <div class="col-lg-4 col-md-6 col-sm-8 mb-4">
+                        <div class="card square-card">
+                            <div class="square-img-container">
+                                <img src="/uploads/{{ animal.imageani }}" alt="{{ animal.prenomani }}" class="card-img-top img-fluid">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                <a class="text-decoration-none text-black" href="/{{animal.prenomani}}">{{ animal.prenomani }}</a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% if is_granted('ROLE_ADMIN') %}
+<div class="container mt-5">
+    <h2 class="text-white mb-4">Nombre de visites par animal</h2>
+    <div class="table-responsive">
+        <table class="table table-dark table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Nom de l'animal</th>
+                    <th scope="col">Nombre de vues</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Loulou</td>
+                    <td>{{ viewCounts.loulouCount}}</td>
+                </tr>
+                <tr>
+                    <td>Coco</td>
+                    <td>{{ viewCounts.cocoCount }}</td>
+                </tr>
+                <tr>
+                    <td>Sophie</td>
+                    <td>{{ viewCounts.sophieCount }}</td>
+                </tr
+                <tr>
+                    <td>Coco2</td>
+                    <td>{{ viewCounts.coco2Count }}</td>
+                </tr>
+                <tr>
+                    <td>Joseph</td>
+                    <td>{{ viewCounts.josephCount }}</td>
+                </tr>
+                <tr>
+                    <td>Céli</td>
+                    <td>{{ viewCounts.celiCount }}</td>
+                </tr>
+                <tr>
+                    <td>Hector</td>
+                    <td>{{ viewCounts.hectorCount }}</td>
+                </tr>
+                <tr>
+                    <td>Zaza</td>
+                    <td>{{ viewCounts.zazaCount }}</td>
+                </tr>
+                <tr>
+                    <td>Léo</td>
+                    <td>{{ viewCounts.leoCount }}</td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+   
 </style>
-
-<div class="example-wrapper">
-    <div class="container">
-
-<p class="text-white">Cette page a été vue{{ viewCount }} et {{viewCount1}}fois.</p>
-</div>
-</div>
 {% endblock %}
- 

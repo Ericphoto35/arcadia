@@ -15,25 +15,12 @@ class SigninType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $roles = [
-            'ROLE_VETO' => 'ROLE_VETO',
-            'ROLE_EMP' => 'ROLE_EMP',
-        ];
-
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'Email',
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Password',
-            ])
-            ->add('roles', ChoiceType::class, [
-                'label' => 'Roles',
-                'choices' => $roles,
-                'multiple' => true, 
-                'expanded' => false, 
-                'placeholder' => 'Choose a role (or roles)',
-                'required' => true, 
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Submit',
